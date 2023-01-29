@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from shop.models import Store
 from shop.permissions import ShopPermission
-from shop.serializers.store_serializers import StoreSerializer
+from shop.serializers.shop import StoreSerializer
 
 
 class StoreViewSet(viewsets.ModelViewSet):

@@ -9,30 +9,27 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import environ
+import os
 
 from pathlib import Path
 
-
-env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 ENV_FILE_PATH = BASE_DIR.joinpath('.env')
 
-environ.Env.read_env(ENV_FILE_PATH)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', '45612332fdsf')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', False)
+DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -96,18 +93,18 @@ WSGI_APPLICATION = "eShop.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "USER": env('POSTGRES_USER'),
-        "PASSWORD": env('POSTGRES_PASSWORD'),
-        "NAME": env('POSTGRES_DB'),
-        "HOST": env('POSTGRES_HOST'),
-        "PORT": env('POSTGRES_PORT')
+        "USER": os.environ.get('POSTGRES_USER'),
+        "PASSWORD": os.environ.get('POSTGRES_PASSWORD'),
+        "NAME": os.environ.get('POSTGRES_DB'),
+        "HOST": os.environ.get('POSTGRES_HOST'),
+        "PORT": os.environ.get('POSTGRES_PORT')
     }
 }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
-AUTH_USER_MODEL = 'user.User'
+AUTH_USER_MODEL = 'shop.User'
 
 LOGIN_REDIRECT_URL = "/shop/"
 
